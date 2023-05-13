@@ -3,6 +3,7 @@ package io.greentesla.api;
 import io.greentesla.model.transactions.Accounts;
 import io.greentesla.model.transactions.Transaction;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.greentesla.service.TransactionsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -52,12 +53,9 @@ public class TransactionsApiController implements TransactionsApi {
     public ResponseEntity<Accounts> report(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody List<Transaction> body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Accounts>(objectMapper.readValue("[ {\n  \"debitCount\" : 2,\n  \"balance\" : 0.8008282,\n  \"creditCount\" : 2,\n  \"account\" : \"3.2309111922661937E+25\"\n}, {\n  \"debitCount\" : 2,\n  \"balance\" : 0.8008282,\n  \"creditCount\" : 2,\n  \"account\" : \"3.2309111922661937E+25\"\n} ]", Accounts.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Accounts>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            TransactionsService transactionsService = new TransactionsService();
+            Accounts res = transactionsService.solve(body);
+            return new ResponseEntity<Accounts>(res, HttpStatus.OK);
         }
 
         return new ResponseEntity<Accounts>(HttpStatus.NOT_IMPLEMENTED);
