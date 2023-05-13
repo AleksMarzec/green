@@ -2,7 +2,6 @@ package io.greentesla.model.atmservice;
 
 import java.util.Objects;
 
-import io.greentesla.model.atmservice.ATM;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 
