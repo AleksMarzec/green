@@ -3,6 +3,7 @@ package io.greentesla.api;
 import io.greentesla.model.atmservice.Order;
 import io.greentesla.model.atmservice.Task;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.greentesla.service.AtmsService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -36,13 +37,12 @@ public class AtmsApiController implements AtmsApi {
 
     public ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody List<Task> body) {
         String accept = request.getHeader("Accept");
+        AtmsService logic = new AtmsService();
+
         if (accept != null && accept.contains("application/json")) {
-            try {
-              return new ResponseEntity<Order>(objectMapper.readValue("[ {\n  \"atmId\" : 500,\n  \"region\" : 10\n}, {\n  \"atmId\" : 500,\n  \"region\" : 10\n} ]", Order.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Order>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            AtmsService atmsService = new AtmsService();
+            Order res = atmsService.solve(body);
+            return new ResponseEntity<Order>(res, HttpStatus.OK);
         }
 
         return new ResponseEntity<Order>(HttpStatus.NOT_IMPLEMENTED);
