@@ -3,6 +3,7 @@ package io.greentesla.api;
 import io.greentesla.model.onlinegame.Order;
 import io.greentesla.model.onlinegame.Players;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.greentesla.service.OnlineGameService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -52,12 +53,9 @@ public class OnlinegameApiController implements OnlinegameApi {
     public ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Players body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Order>(objectMapper.readValue("[ [ {\n  \"numberOfPlayers\" : 10,\n  \"points\" : 500\n}, {\n  \"numberOfPlayers\" : 10,\n  \"points\" : 500\n} ], [ {\n  \"numberOfPlayers\" : 10,\n  \"points\" : 500\n}, {\n  \"numberOfPlayers\" : 10,\n  \"points\" : 500\n} ] ]", Order.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Order>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            OnlineGameService onlineGameService = new OnlineGameService();
+            Order res = onlineGameService.solve(body);
+            return new ResponseEntity<Order>(res, HttpStatus.OK);
         }
 
         return new ResponseEntity<Order>(HttpStatus.NOT_IMPLEMENTED);
