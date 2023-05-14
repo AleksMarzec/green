@@ -3,6 +3,7 @@ package io.greentesla.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.greentesla.model.generated.transactions.Accounts;
 import io.greentesla.model.generated.transactions.Transaction;
+import io.greentesla.model.generated.transactions.Transactions;
 import io.greentesla.service.TransactionsService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -34,7 +35,7 @@ public class TransactionsApiController implements TransactionsApi {
         this.request = request;
     }
 
-    public ResponseEntity<Accounts> report(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody List<Transaction> body) {
+    public ResponseEntity<Accounts> report(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Transactions body) {
         Accounts result = null;
 
         try {

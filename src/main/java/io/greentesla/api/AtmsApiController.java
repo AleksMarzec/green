@@ -2,6 +2,7 @@ package io.greentesla.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.greentesla.model.generated.atmservice.Order;
+import io.greentesla.model.generated.atmservice.ServiceTasks;
 import io.greentesla.model.generated.atmservice.Task;
 import io.greentesla.service.AtmsService;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,7 +35,7 @@ public class AtmsApiController implements AtmsApi {
         this.request = request;
     }
 
-    public ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody List<Task> body) {
+    public ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody ServiceTasks body) {
         Order result = null;
 
         try {

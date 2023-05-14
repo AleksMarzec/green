@@ -3,6 +3,7 @@ package io.greentesla.service;
 import io.greentesla.model.generated.transactions.Account;
 import io.greentesla.model.generated.transactions.Accounts;
 import io.greentesla.model.generated.transactions.Transaction;
+import io.greentesla.model.generated.transactions.Transactions;
 import io.greentesla.service.utils.JsonCasesReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,8 +15,8 @@ class TransactionsServiceTest {
     @Test
     public void regularCaseShouldBeTheSameAsResult() {
         JsonCasesReader reader = new JsonCasesReader();
-        List<Transaction> transactions = reader.readTransactionsRequest("regular");
-        List<Account> expectedResult = reader.readTransactionsResponse("regular");
+        Transactions transactions = reader.readTransactionsRequest("regular");
+        Accounts expectedResult = reader.readTransactionsResponse("regular");
 
         TransactionsService service = new TransactionsService();
         Accounts result = service.solve(transactions);
@@ -26,7 +27,7 @@ class TransactionsServiceTest {
     @Test
     public void largeDataSetShouldHandleItFast() {
         JsonCasesReader reader = new JsonCasesReader();
-        List<Transaction> transactions = reader.readTransactionsRequest("large");
+        Transactions transactions = reader.readTransactionsRequest("large");
         TransactionsService service = new TransactionsService();
 
         long startTime = System.currentTimeMillis();

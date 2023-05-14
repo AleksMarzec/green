@@ -2,6 +2,7 @@ package io.greentesla.service;
 
 import io.greentesla.model.generated.atmservice.ATM;
 import io.greentesla.model.generated.atmservice.Order;
+import io.greentesla.model.generated.atmservice.ServiceTasks;
 import io.greentesla.model.generated.atmservice.Task;
 import io.greentesla.utils.TaskComparator;
 
@@ -11,7 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class AtmsService {
-    public Order solve(List<Task> tasks) {
+    public Order solve(ServiceTasks tasks) {
         Collections.sort(tasks, new TaskComparator());
         int currentRegion = tasks.get(0).getRegion();
         HashSet<Integer> atmIdsAlreadySeen = new HashSet<>();

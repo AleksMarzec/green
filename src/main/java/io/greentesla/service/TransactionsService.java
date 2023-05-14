@@ -3,13 +3,14 @@ package io.greentesla.service;
 import io.greentesla.model.dto.transactions.AccountDto;
 import io.greentesla.model.generated.transactions.Accounts;
 import io.greentesla.model.generated.transactions.Transaction;
+import io.greentesla.model.generated.transactions.Transactions;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.TreeMap;
 
 public class TransactionsService {
-    public Accounts solve(List<Transaction> transactions) {
+    public Accounts solve(Transactions transactions) {
         TreeMap<String, AccountDto> accounts = new TreeMap<>();
 
         for (Transaction transaction : transactions) {

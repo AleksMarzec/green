@@ -6,6 +6,7 @@
 package io.greentesla.api;
 
 import io.greentesla.model.generated.atmservice.Order;
+import io.greentesla.model.generated.atmservice.ServiceTasks;
 import io.greentesla.model.generated.atmservice.Task;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,7 +35,7 @@ public interface AtmsApi {
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody List<Task> body);
+    ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody ServiceTasks body);
 
 }
 
