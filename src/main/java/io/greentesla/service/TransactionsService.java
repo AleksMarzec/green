@@ -17,38 +17,46 @@ public class TransactionsService {
             // handle debit
             if (accounts.containsKey(transaction.getDebitAccount())) {
                 AccountDto existingAccount = accounts.get(transaction.getDebitAccount());
-                existingAccount.setDebitCount(existingAccount.getDebitCount() + 1);
-                existingAccount.setBalance(existingAccount.getBalance().subtract(new BigDecimal(transaction.getAmount() * 100)));
+                modifyDebit(existingAccount, transaction.getAmount());
             } else {
-                AccountDto debitAccount = new AccountDto();
-                debitAccount.setAccount(transaction.getDebitAccount());
-                debitAccount.setDebitCount(1);
-                debitAccount.setCreditCount(0);
-                debitAccount.setBalance(new BigDecimal(transaction.getAmount() * 100).multiply(new BigDecimal(-1)));
+                String debitAccountText = transaction.getDebitAccount();
+                BigDecimal initialBalance = new BigDecimal(transaction.getAmount() * 100).multiply(new BigDecimal(-1));
+                AccountDto debitAccount = createAccount(debitAccountText, 1, 0, initialBalance);
 
-                accounts.put(transaction.getDebitAccount(), debitAccount);
+                accounts.put(debitAccountText, debitAccount);
             }
 
             // handle credit
             if (accounts.containsKey(transaction.getCreditAccount())) {
                 AccountDto existingAccount = accounts.get(transaction.getCreditAccount());
-                existingAccount.setCreditCount(existingAccount.getCreditCount() + 1);
-                existingAccount.setBalance(existingAccount.getBalance().add(new BigDecimal(transaction.getAmount() * 100)));
+                modifyCredit(existingAccount, transaction.getAmount());
             } else {
-                AccountDto creditAccount = new AccountDto();
-                creditAccount.setAccount(transaction.getCreditAccount());
-                creditAccount.setDebitCount(0);
-                creditAccount.setCreditCount(1);
-                creditAccount.setBalance(new BigDecimal(transaction.getAmount() * 100));
+                String creditAccountText = transaction.getCreditAccount();
+                BigDecimal initialBalance = new BigDecimal(transaction.getAmount() * 100);
+                AccountDto creditAccount = createAccount(creditAccountText, 0, 1, initialBalance);
 
-                accounts.put(transaction.getCreditAccount(), creditAccount);
+                accounts.put(creditAccountText, creditAccount);
             }
         }
 
-        Accounts accounts1 = new Accounts();
+        Accounts results = new Accounts();
         for (AccountDto account : accounts.values()) {
-            accounts1.add(account.toAccount());
+            results.add(account.toAccount());
         }
-        return accounts1;
+        return results;
+    }
+
+    private AccountDto createAccount(String account, int debitCount, int creditCount, BigDecimal balance) {
+        return new AccountDto(account, debitCount, creditCount, balance);
+    }
+
+    private void modifyCredit(AccountDto account, float amount) {
+        account.setCreditCount(account.getCreditCount() + 1);
+        account.setBalance(account.getBalance().add(new BigDecimal(amount * 100)));
+    }
+
+    private void modifyDebit(AccountDto account, float amount) {
+        account.setDebitCount(account.getDebitCount() + 1);
+        account.setBalance(account.getBalance().subtract(new BigDecimal(amount * 100)));
     }
 }

@@ -22,4 +22,18 @@ class TransactionsServiceTest {
 
         Assertions.assertArrayEquals(expectedResult.toArray(), result.toArray());
     }
+
+    @Test
+    public void largeDataSetShouldHandleItFast() {
+        JsonCasesReader reader = new JsonCasesReader();
+        List<Transaction> transactions = reader.readTransactionsRequest("large");
+        TransactionsService service = new TransactionsService();
+
+        long startTime = System.currentTimeMillis();
+        Accounts result = service.solve(transactions);
+        long estimatedTime = System.currentTimeMillis() - startTime;
+
+        boolean isLess = estimatedTime < 3000 / 5; // dataset is 4x smaller than expected one, and complexity is log, so let's add some margin
+        Assertions.assertEquals(isLess, true);
+    }
 }

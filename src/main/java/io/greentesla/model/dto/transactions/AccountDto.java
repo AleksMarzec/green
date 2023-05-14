@@ -20,6 +20,13 @@ public class AccountDto   {
         this.creditCount = account.getCreditCount();
     }
 
+    public AccountDto(String account, int debitCount, int creditCount, BigDecimal balance) {
+        this.account = account;
+        this.debitCount = debitCount;
+        this.creditCount = creditCount;
+        this.balance = balance;
+    }
+
     public String getAccount() { return account; }
     public void setAccount(String account) {
         this.account = account;
