@@ -14,11 +14,11 @@ public class TransactionsService {
 
         for (Transaction transaction : transactions) {
             // handle debit
-            if (accounts.containsKey(transaction.getDebitAccount())) {
-                AccountDto existingAccount = accounts.get(transaction.getDebitAccount());
+            String debitAccountText = transaction.getDebitAccount();
+            if (accounts.containsKey(debitAccountText)) {
+                AccountDto existingAccount = accounts.get(debitAccountText);
                 modifyDebit(existingAccount, transaction.getAmount());
             } else {
-                String debitAccountText = transaction.getDebitAccount();
                 BigDecimal initialBalance = BigDecimal.valueOf(transaction.getAmount() * 100).multiply(new BigDecimal(-1));
                 AccountDto debitAccount = createAccount(debitAccountText, 1, 0, initialBalance);
 
@@ -26,11 +26,11 @@ public class TransactionsService {
             }
 
             // handle credit
-            if (accounts.containsKey(transaction.getCreditAccount())) {
-                AccountDto existingAccount = accounts.get(transaction.getCreditAccount());
+            String creditAccountText = transaction.getCreditAccount();
+            if (accounts.containsKey(creditAccountText)) {
+                AccountDto existingAccount = accounts.get(creditAccountText);
                 modifyCredit(existingAccount, transaction.getAmount());
             } else {
-                String creditAccountText = transaction.getCreditAccount();
                 BigDecimal initialBalance = BigDecimal.valueOf(transaction.getAmount() * 100);
                 AccountDto creditAccount = createAccount(creditAccountText, 0, 1, initialBalance);
 

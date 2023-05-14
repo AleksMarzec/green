@@ -16,7 +16,7 @@ public class AtmsService {
         int currentRegion = tasks.get(0).getRegion();
         HashSet<Integer> atmIdsAlreadySeen = new HashSet<>();
 
-        List<ATM> atmsOrder = new ArrayList<>();
+        Order order = new Order();
 
         for (Task task : tasks) {
             int taskRegion = task.getRegion();
@@ -33,12 +33,10 @@ public class AtmsService {
                 ATM atm = new ATM();
                 atm.setAtmId(task.getAtmId());
                 atm.setRegion(task.getRegion());
-                atmsOrder.add(atm);
+                order.add(atm);
             }
         }
 
-        Order order = new Order();
-        order.addAll(atmsOrder);
         return order;
     }
 }

@@ -35,15 +35,17 @@ public class AtmsApiController implements AtmsApi {
     }
 
     public ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody List<Task> body) {
-        String accept = request.getHeader("Accept");
-        AtmsService logic = new AtmsService();
+        Order result = null;
 
-        if (accept == null || !accept.contains("application/json")) {
-            return new ResponseEntity<Order>(HttpStatus.NOT_IMPLEMENTED);
+        try {
+            AtmsService atmsService = new AtmsService();
+            result = atmsService.solve(body);
+        } catch (Exception ex) {
+            // logger
+            return new ResponseEntity<Order>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        AtmsService atmsService = new AtmsService();
-        Order res = atmsService.solve(body);
-        return new ResponseEntity<Order>(res, HttpStatus.OK);
+
+        return new ResponseEntity<Order>(result, HttpStatus.OK);
 
     }
 
