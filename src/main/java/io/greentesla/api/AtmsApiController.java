@@ -38,13 +38,13 @@ public class AtmsApiController implements AtmsApi {
         String accept = request.getHeader("Accept");
         AtmsService logic = new AtmsService();
 
-        if (accept != null && accept.contains("application/json")) {
-            AtmsService atmsService = new AtmsService();
-            Order res = atmsService.solve(body);
-            return new ResponseEntity<Order>(res, HttpStatus.OK);
+        if (accept == null || !accept.contains("application/json")) {
+            return new ResponseEntity<Order>(HttpStatus.NOT_IMPLEMENTED);
         }
+        AtmsService atmsService = new AtmsService();
+        Order res = atmsService.solve(body);
+        return new ResponseEntity<Order>(res, HttpStatus.OK);
 
-        return new ResponseEntity<Order>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

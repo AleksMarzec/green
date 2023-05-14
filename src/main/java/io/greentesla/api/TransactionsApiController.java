@@ -36,13 +36,13 @@ public class TransactionsApiController implements TransactionsApi {
 
     public ResponseEntity<Accounts> report(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody List<Transaction> body) {
         String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            TransactionsService transactionsService = new TransactionsService();
-            Accounts res = transactionsService.solve(body);
-            return new ResponseEntity<Accounts>(res, HttpStatus.OK);
+        if (accept == null || !accept.contains("application/json")) {
+            return new ResponseEntity<Accounts>(HttpStatus.NOT_IMPLEMENTED);
         }
+        TransactionsService transactionsService = new TransactionsService();
+        Accounts res = transactionsService.solve(body);
+        return new ResponseEntity<Accounts>(res, HttpStatus.OK);
 
-        return new ResponseEntity<Accounts>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 }
