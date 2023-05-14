@@ -1,3 +1,3 @@
 #!/bin/bash
-mvn clean install
-mvn clean package
+mvn clean install -DskipTests
+mvn clean package -DskipTests

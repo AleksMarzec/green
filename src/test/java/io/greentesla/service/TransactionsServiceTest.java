@@ -14,8 +14,8 @@ class TransactionsServiceTest {
     @Test
     public void regularCaseShouldBeTheSameAsResult() {
         JsonCasesReader reader = new JsonCasesReader();
-        List<Transaction> transactions = reader.readTransactionsTransactions("src/test/java/io/greentesla/service/jsonrequests/transactions.regular.json");
-        List<Account> expectedResult = reader.readTransactionsAccounts("src/test/java/io/greentesla/service/jsonresponses/transactions.regular.json");
+        List<Transaction> transactions = reader.readTransactionsRequest("regular");
+        List<Account> expectedResult = reader.readTransactionsResponse("regular");
 
         TransactionsService service = new TransactionsService();
         Accounts result = service.solve(transactions);
