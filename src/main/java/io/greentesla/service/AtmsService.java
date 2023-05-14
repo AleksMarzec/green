@@ -12,7 +12,7 @@ public class AtmsService {
         int currentRegion = tasks.get(0).getRegion();
         HashSet<Integer> atmIdsAlreadySeen = new HashSet<>();
 
-        List<ATM> result = new ArrayList<>();
+        List<ATM> atmsOrder = new ArrayList<>();
 
         for (Task task : tasks) {
             int taskRegion = task.getRegion();
@@ -29,12 +29,12 @@ public class AtmsService {
                 ATM atm = new ATM();
                 atm.setAtmId(task.getAtmId());
                 atm.setRegion(task.getRegion());
-                result.add(atm);
+                atmsOrder.add(atm);
             }
         }
 
         Order order = new Order();
-        order.addAll(result);
+        order.addAll(atmsOrder);
         return order;
     }
 }
@@ -45,10 +45,10 @@ class TaskComparator implements Comparator<Task> {
         if (o1.getRegion() != o2.getRegion()) {
             return o1.getRegion() - o2.getRegion();
         }
-        return mapper(o2) - mapper(o1);
+        return priorityMapper(o2) - priorityMapper(o1);
     }
 
-    private static Integer mapper(Task task) {
+    private static Integer priorityMapper(Task task) {
         switch (task.getRequestType()) {
             case FAILURE_RESTART:
                 return 4;
@@ -59,7 +59,6 @@ class TaskComparator implements Comparator<Task> {
             case STANDARD:
                 return 1;
             default:
-                // could throw the exception
                 return 0;
         }
     }
