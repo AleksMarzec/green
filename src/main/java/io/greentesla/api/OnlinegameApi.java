@@ -10,10 +10,10 @@ import io.greentesla.model.generated.onlinegame.Players;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,13 +26,13 @@ import javax.validation.Valid;
 @Validated
 public interface OnlinegameApi {
 
-    @Operation(summary = "", description = "Calculate order", tags={  })
+    @Operation(summary = "", description = "Calculate order", tags = {})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Order.class))) })
+            @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Order.class)))})
     @RequestMapping(value = "/onlinegame/calculate",
-            produces = { "application/json" },
-            consumes = { "application/json" },
+            produces = {"application/json"},
+            consumes = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Players body);
+    ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Players body);
 
 }

@@ -4,29 +4,24 @@ import io.greentesla.model.generated.onlinegame.Clan;
 import io.greentesla.model.generated.onlinegame.Group;
 import io.greentesla.model.generated.onlinegame.Order;
 import io.greentesla.model.generated.onlinegame.Players;
+import io.greentesla.utils.ClanComparator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class OnlineGameService {
     public Order solve(Players players) {
-        // shouldn't change the objects inside the request
-        List<Clan> sortedClans = players.getClans();
+        List<Clan> sortedClans = players.getClans().subList(0, players.getClans().size()); // we shouldn't change incoming data
 
-        Collections.sort(sortedClans, new Comparator<Clan>() {
-            @Override
-            public int compare(Clan c1, Clan c2) {
-                if (c1.getPoints() == c2.getPoints()) {
-                    return Integer.compare(c1.getNumberOfPlayers(), c2.getNumberOfPlayers());
-                }
-                return Integer.compare(c2.getPoints(), c1.getPoints());
-            }
-        });
+        Collections.sort(sortedClans, new ClanComparator());
 
-        List<Group> res = new ArrayList<>();
+        Order orderedGroups = new Order();
 
         while (!sortedClans.isEmpty()) {
             int currentGroupSize = 0;
-            List<Integer> toRemove = new ArrayList<>();
+            List<Clan> toRemove = new ArrayList<>();
             Group scheduledClans = new Group();
 
             for (int i = 0; i < sortedClans.size(); i++) {
@@ -35,7 +30,7 @@ public class OnlineGameService {
                 if (currentGroupSize + clan.getNumberOfPlayers() <= players.getGroupCount()) {
                     currentGroupSize += clan.getNumberOfPlayers();
                     scheduledClans.add(clan);
-                    toRemove.add(i);
+                    toRemove.add(clan);
                 }
 
                 if (currentGroupSize == players.getGroupCount()) {
@@ -43,16 +38,13 @@ public class OnlineGameService {
                 }
             }
 
-            for (int i = toRemove.size() - 1; i >= 0; i--) {
-                sortedClans.remove((int) toRemove.get(i));
+            for (Clan clanToRemove : toRemove) {
+                sortedClans.remove(clanToRemove);
             }
 
-            res.add(scheduledClans);
+            orderedGroups.add(scheduledClans);
         }
 
-        Order order = new Order();
-        order.addAll(res);
-
-        return order;
+        return orderedGroups;
     }
 }

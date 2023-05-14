@@ -1,10 +1,12 @@
 package io.greentesla.model.generated.onlinegame;
-import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import java.util.Objects;
 
 /**
  * Clan
@@ -13,7 +15,7 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-05-08T20:53:53.976764680Z[GMT]")
 
 
-public class Clan   {
+public class Clan {
     @JsonProperty("numberOfPlayers")
     private Integer numberOfPlayers = null;
 
@@ -29,11 +31,14 @@ public class Clan   {
      * Get numberOfPlayers
      * minimum: 1
      * maximum: 1000
+     *
      * @return numberOfPlayers
      **/
     @Schema(example = "10", description = "")
 
-    @Min(1) @Max(1000)   public Integer getNumberOfPlayers() {
+    @Min(1)
+    @Max(1000)
+    public Integer getNumberOfPlayers() {
         return numberOfPlayers;
     }
 
@@ -50,11 +55,14 @@ public class Clan   {
      * Get points
      * minimum: 1
      * maximum: 1000000
+     *
      * @return points
      **/
     @Schema(example = "500", description = "")
 
-    @Min(1) @Max(1000000)   public Integer getPoints() {
+    @Min(1)
+    @Max(1000000)
+    public Integer getPoints() {
         return points;
     }
 

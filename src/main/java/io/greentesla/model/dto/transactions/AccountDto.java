@@ -3,19 +3,19 @@ package io.greentesla.model.dto.transactions;
 import io.greentesla.model.generated.transactions.Account;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Currency;
 
-public class AccountDto   {
+public class AccountDto {
     private String account = null;
     private Integer debitCount = null;
     private Integer creditCount = null;
     private BigDecimal balance = null;
 
-    public AccountDto() { }
+    public AccountDto() {
+    }
+
     public AccountDto(Account account) {
         this.account = account.getAccount();
-        this.balance = new BigDecimal(account.getBalance() * 100); // avoid precision numbers, could also be solved by using library for money
+        this.balance = BigDecimal.valueOf(account.getBalance() * 100); // avoid precision numbers, could also be solved by using library for money
         this.debitCount = account.getDebitCount();
         this.creditCount = account.getCreditCount();
     }
@@ -27,7 +27,10 @@ public class AccountDto   {
         this.balance = balance;
     }
 
-    public String getAccount() { return account; }
+    public String getAccount() {
+        return account;
+    }
+
     public void setAccount(String account) {
         this.account = account;
     }

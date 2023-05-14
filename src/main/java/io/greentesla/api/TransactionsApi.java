@@ -10,10 +10,10 @@ import io.greentesla.model.generated.transactions.Transaction;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,13 +27,13 @@ import java.util.List;
 @Validated
 public interface TransactionsApi {
 
-    @Operation(summary = "", description = "Execute report", tags={  })
+    @Operation(summary = "", description = "Execute report", tags = {})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Accounts.class))) })
+            @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Accounts.class)))})
     @RequestMapping(value = "/transactions/report",
-            produces = { "application/json" },
-            consumes = { "application/json" },
+            produces = {"application/json"},
+            consumes = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<Accounts> report(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody List<Transaction> body);
+    ResponseEntity<Accounts> report(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody List<Transaction> body);
 
 }

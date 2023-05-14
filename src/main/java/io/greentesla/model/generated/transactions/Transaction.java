@@ -1,11 +1,11 @@
 package io.greentesla.model.generated.transactions;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Size;
+import java.util.Objects;
 
 /**
  * Transaction
@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-05-08T20:52:28.561455274Z[GMT]")
 
 
-public class Transaction   {
+public class Transaction {
     @JsonProperty("debitAccount")
     private String debitAccount = null;
 
@@ -31,11 +31,13 @@ public class Transaction   {
 
     /**
      * Get debitAccount
+     *
      * @return debitAccount
      **/
     @Schema(example = "3.2309111922661937E+25", description = "")
 
-    @Size(min=26,max=26)   public String getDebitAccount() {
+    @Size(min = 26, max = 26)
+    public String getDebitAccount() {
         return debitAccount;
     }
 
@@ -50,11 +52,13 @@ public class Transaction   {
 
     /**
      * Get creditAccount
+     *
      * @return creditAccount
      **/
     @Schema(example = "3.107431869813706E+25", description = "")
 
-    @Size(min=26,max=26)   public String getCreditAccount() {
+    @Size(min = 26, max = 26)
+    public String getCreditAccount() {
         return creditAccount;
     }
 
@@ -69,6 +73,7 @@ public class Transaction   {
 
     /**
      * Get amount
+     *
      * @return amount
      **/
     @Schema(description = "")

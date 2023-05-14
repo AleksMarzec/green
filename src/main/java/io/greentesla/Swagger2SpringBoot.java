@@ -2,34 +2,30 @@ package io.greentesla;
 
 import io.greentesla.configuration.LocalDateConverter;
 import io.greentesla.configuration.LocalDateTimeConverter;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import springfox.documentation.oas.annotations.EnableOpenApi;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
 @SpringBootApplication
 @EnableOpenApi
-@ComponentScan(basePackages = { "io.greentesla", "io.greentesla.api" , "io.greentesla.configuration"})
+@ComponentScan(basePackages = {"io.greentesla", "io.greentesla.api", "io.greentesla.configuration"})
 public class Swagger2SpringBoot implements CommandLineRunner {
+
+    public static void main(String[] args) throws Exception {
+        new SpringApplication(Swagger2SpringBoot.class).run(args);
+    }
 
     @Override
     public void run(String... arg0) throws Exception {
         if (arg0.length > 0 && arg0[0].equals("exitcode")) {
             throw new ExitException();
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        new SpringApplication(Swagger2SpringBoot.class).run(args);
     }
 
     @Configuration

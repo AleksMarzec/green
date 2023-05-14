@@ -1,11 +1,10 @@
 package io.greentesla.model.generated.transactions;
 
-import java.util.Objects;
-
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.ArrayList;
-
 import org.springframework.validation.annotation.Validated;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Ordered list of accounts
@@ -15,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-05-08T20:52:28.561455274Z[GMT]")
 
 
-public class Accounts extends ArrayList<Account>  {
+public class Accounts extends ArrayList<Account> {
 
     @Override
     public boolean equals(java.lang.Object o) {

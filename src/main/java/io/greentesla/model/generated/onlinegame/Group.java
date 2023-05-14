@@ -1,10 +1,10 @@
 package io.greentesla.model.generated.onlinegame;
-import java.util.Objects;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.ArrayList;
-
 import org.springframework.validation.annotation.Validated;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Ordered list of clans in group
@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-05-08T20:53:53.976764680Z[GMT]")
 
 
-public class Group extends ArrayList<Clan>  {
+public class Group extends ArrayList<Clan> {
 
     @Override
     public boolean equals(java.lang.Object o) {
