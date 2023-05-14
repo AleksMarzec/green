@@ -1,12 +1,16 @@
 package io.greentesla.model.generated.onlinegame;
-import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.util.Objects;
 
 /**
  * Players
@@ -15,7 +19,7 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-05-08T20:53:53.976764680Z[GMT]")
 
 
-public class Players   {
+public class Players {
     @JsonProperty("groupCount")
     private Integer groupCount = null;
 
@@ -32,11 +36,14 @@ public class Players   {
      * Number of players in single group
      * minimum: 1
      * maximum: 1000
+     *
      * @return groupCount
      **/
     @Schema(example = "6", description = "Number of players in single group")
 
-    @Min(1) @Max(1000)   public Integer getGroupCount() {
+    @Min(1)
+    @Max(1000)
+    public Integer getGroupCount() {
         return groupCount;
     }
 
@@ -59,11 +66,13 @@ public class Players   {
 
     /**
      * Get clans
+     *
      * @return clans
      **/
     @Schema(description = "")
     @Valid
-    @Size(max=20000)   public List<Clan> getClans() {
+    @Size(max = 20000)
+    public List<Clan> getClans() {
         return clans;
     }
 

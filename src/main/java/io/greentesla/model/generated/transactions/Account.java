@@ -1,10 +1,11 @@
 package io.greentesla.model.generated.transactions;
-import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Size;
+import java.util.Objects;
 
 /**
  * Account
@@ -13,7 +14,7 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-05-08T20:52:28.561455274Z[GMT]")
 
 
-public class Account   {
+public class Account {
     @JsonProperty("account")
     private String account = null;
 
@@ -33,11 +34,13 @@ public class Account   {
 
     /**
      * Get account
+     *
      * @return account
      **/
     @Schema(example = "3.2309111922661937E+25", description = "")
 
-    @Size(min=26,max=26)   public String getAccount() {
+    @Size(min = 26, max = 26)
+    public String getAccount() {
         return account;
     }
 
@@ -52,6 +55,7 @@ public class Account   {
 
     /**
      * Number of debit transactions
+     *
      * @return debitCount
      **/
     @Schema(example = "2", description = "Number of debit transactions")
@@ -71,6 +75,7 @@ public class Account   {
 
     /**
      * Number of credit transactions
+     *
      * @return creditCount
      **/
     @Schema(example = "2", description = "Number of credit transactions")
@@ -90,6 +95,7 @@ public class Account   {
 
     /**
      * Get balance
+     *
      * @return balance
      **/
     @Schema(description = "")

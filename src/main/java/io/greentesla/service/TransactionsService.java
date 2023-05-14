@@ -5,7 +5,6 @@ import io.greentesla.model.generated.transactions.Accounts;
 import io.greentesla.model.generated.transactions.Transaction;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -20,7 +19,7 @@ public class TransactionsService {
                 modifyDebit(existingAccount, transaction.getAmount());
             } else {
                 String debitAccountText = transaction.getDebitAccount();
-                BigDecimal initialBalance = new BigDecimal(transaction.getAmount() * 100).multiply(new BigDecimal(-1));
+                BigDecimal initialBalance = BigDecimal.valueOf(transaction.getAmount() * 100).multiply(new BigDecimal(-1));
                 AccountDto debitAccount = createAccount(debitAccountText, 1, 0, initialBalance);
 
                 accounts.put(debitAccountText, debitAccount);
@@ -32,7 +31,7 @@ public class TransactionsService {
                 modifyCredit(existingAccount, transaction.getAmount());
             } else {
                 String creditAccountText = transaction.getCreditAccount();
-                BigDecimal initialBalance = new BigDecimal(transaction.getAmount() * 100);
+                BigDecimal initialBalance = BigDecimal.valueOf(transaction.getAmount() * 100);
                 AccountDto creditAccount = createAccount(creditAccountText, 0, 1, initialBalance);
 
                 accounts.put(creditAccountText, creditAccount);

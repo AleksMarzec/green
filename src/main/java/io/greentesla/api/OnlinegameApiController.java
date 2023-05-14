@@ -1,8 +1,8 @@
 package io.greentesla.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.greentesla.model.generated.onlinegame.Order;
 import io.greentesla.model.generated.onlinegame.Players;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.greentesla.service.OnlineGameService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -11,11 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-05-08T20:53:53.976764680Z[GMT]")
 @RestController
@@ -33,7 +33,7 @@ public class OnlinegameApiController implements OnlinegameApi {
         this.request = request;
     }
 
-    public ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Players body) {
+    public ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Players body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             OnlineGameService onlineGameService = new OnlineGameService();

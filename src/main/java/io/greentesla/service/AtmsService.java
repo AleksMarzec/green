@@ -3,8 +3,12 @@ package io.greentesla.service;
 import io.greentesla.model.generated.atmservice.ATM;
 import io.greentesla.model.generated.atmservice.Order;
 import io.greentesla.model.generated.atmservice.Task;
+import io.greentesla.utils.TaskComparator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 
 public class AtmsService {
     public Order solve(List<Task> tasks) {
@@ -36,30 +40,5 @@ public class AtmsService {
         Order order = new Order();
         order.addAll(atmsOrder);
         return order;
-    }
-}
-
-class TaskComparator implements Comparator<Task> {
-    @Override
-    public int compare(Task o1, Task o2) {
-        if (o1.getRegion() != o2.getRegion()) {
-            return o1.getRegion() - o2.getRegion();
-        }
-        return priorityMapper(o2) - priorityMapper(o1);
-    }
-
-    private static Integer priorityMapper(Task task) {
-        switch (task.getRequestType()) {
-            case FAILURE_RESTART:
-                return 4;
-            case PRIORITY:
-                return 3;
-            case SIGNAL_LOW:
-                return 2;
-            case STANDARD:
-                return 1;
-            default:
-                return 0;
-        }
     }
 }
