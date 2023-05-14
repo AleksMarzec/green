@@ -1,8 +1,8 @@
 package io.greentesla.service;
 
-import io.greentesla.model.atmservice.ATM;
-import io.greentesla.model.atmservice.Order;
-import io.greentesla.model.atmservice.Task;
+import io.greentesla.model.generated.atmservice.ATM;
+import io.greentesla.model.generated.atmservice.Order;
+import io.greentesla.model.generated.atmservice.Task;
 
 import java.util.*;
 

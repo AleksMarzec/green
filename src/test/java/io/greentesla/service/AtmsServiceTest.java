@@ -1,7 +1,7 @@
 package io.greentesla.service;
 
-import io.greentesla.model.atmservice.Order;
-import io.greentesla.model.atmservice.Task;
+import io.greentesla.model.generated.atmservice.Order;
+import io.greentesla.model.generated.atmservice.Task;
 import io.greentesla.service.utils.JsonCasesReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

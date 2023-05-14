@@ -5,8 +5,8 @@
  */
 package io.greentesla.api;
 
-import io.greentesla.model.atmservice.Order;
-import io.greentesla.model.atmservice.Task;
+import io.greentesla.model.generated.atmservice.Order;
+import io.greentesla.model.generated.atmservice.Task;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

@@ -1,9 +1,9 @@
 package io.greentesla.service;
 
-import io.greentesla.model.onlinegame.Clan;
-import io.greentesla.model.onlinegame.Group;
-import io.greentesla.model.onlinegame.Order;
-import io.greentesla.model.onlinegame.Players;
+import io.greentesla.model.generated.onlinegame.Clan;
+import io.greentesla.model.generated.onlinegame.Group;
+import io.greentesla.model.generated.onlinegame.Order;
+import io.greentesla.model.generated.onlinegame.Players;
 
 import java.util.*;
 

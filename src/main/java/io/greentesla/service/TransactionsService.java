@@ -1,52 +1,62 @@
 package io.greentesla.service;
 
-import io.greentesla.model.transactions.Account;
-import io.greentesla.model.transactions.Accounts;
-import io.greentesla.model.transactions.Transaction;
+import io.greentesla.model.dto.transactions.AccountDto;
+import io.greentesla.model.generated.transactions.Accounts;
+import io.greentesla.model.generated.transactions.Transaction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.TreeMap;
 
 public class TransactionsService {
     public Accounts solve(List<Transaction> transactions) {
-        TreeMap<String, Account> accounts = new TreeMap<>();
+        TreeMap<String, AccountDto> accounts = new TreeMap<>();
 
         for (Transaction transaction : transactions) {
             // handle debit
             if (accounts.containsKey(transaction.getDebitAccount())) {
-                Account existingAccount = accounts.get(transaction.getDebitAccount());
-                existingAccount.setDebitCount(existingAccount.getDebitCount() + 1);
-                existingAccount.setBalance(existingAccount.getBalance() - transaction.getAmount());
+                AccountDto existingAccount = accounts.get(transaction.getDebitAccount());
+                modifyDebit(existingAccount, transaction.getAmount());
             } else {
-                Account debitAccount = new Account();
-                debitAccount.setAccount(transaction.getDebitAccount());
-                debitAccount.setDebitCount(1);
-                debitAccount.setCreditCount(0);
-                debitAccount.setBalance(transaction.getAmount() * -1);
+                String debitAccountText = transaction.getDebitAccount();
+                BigDecimal initialBalance = new BigDecimal(transaction.getAmount() * 100).multiply(new BigDecimal(-1));
+                AccountDto debitAccount = createAccount(debitAccountText, 1, 0, initialBalance);
 
-                accounts.put(transaction.getDebitAccount(), debitAccount);
+                accounts.put(debitAccountText, debitAccount);
             }
 
             // handle credit
             if (accounts.containsKey(transaction.getCreditAccount())) {
-                Account existingAccount = accounts.get(transaction.getCreditAccount());
-                existingAccount.setCreditCount(existingAccount.getCreditCount() + 1);
-                existingAccount.setBalance(existingAccount.getBalance() + transaction.getAmount());
+                AccountDto existingAccount = accounts.get(transaction.getCreditAccount());
+                modifyCredit(existingAccount, transaction.getAmount());
             } else {
-                Account creditAccount = new Account();
-                creditAccount.setAccount(transaction.getCreditAccount());
-                creditAccount.setDebitCount(0);
-                creditAccount.setCreditCount(1);
-                creditAccount.setBalance(transaction.getAmount());
+                String creditAccountText = transaction.getCreditAccount();
+                BigDecimal initialBalance = new BigDecimal(transaction.getAmount() * 100);
+                AccountDto creditAccount = createAccount(creditAccountText, 0, 1, initialBalance);
 
-                accounts.put(transaction.getCreditAccount(), creditAccount);
+                accounts.put(creditAccountText, creditAccount);
             }
         }
 
-        Accounts accounts1 = new Accounts();
-        accounts1.addAll(accounts.values());
-        return accounts1;
+        Accounts results = new Accounts();
+        for (AccountDto account : accounts.values()) {
+            results.add(account.toAccount());
+        }
+        return results;
+    }
+
+    private AccountDto createAccount(String account, int debitCount, int creditCount, BigDecimal balance) {
+        return new AccountDto(account, debitCount, creditCount, balance);
+    }
+
+    private void modifyCredit(AccountDto account, float amount) {
+        account.setCreditCount(account.getCreditCount() + 1);
+        account.setBalance(account.getBalance().add(new BigDecimal(amount * 100)));
+    }
+
+    private void modifyDebit(AccountDto account, float amount) {
+        account.setDebitCount(account.getDebitCount() + 1);
+        account.setBalance(account.getBalance().subtract(new BigDecimal(amount * 100)));
     }
 }
