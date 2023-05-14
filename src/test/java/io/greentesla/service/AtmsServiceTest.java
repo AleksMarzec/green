@@ -21,4 +21,16 @@ public class AtmsServiceTest {
 
         Assertions.assertArrayEquals(expectedResult.toArray(), result.toArray());
     }
+
+    @Test
+    public void regularCase2() {
+        JsonCasesReader reader = new JsonCasesReader();
+        List<Task> tasks = reader.readAtmServicesRequest("regular2");
+        Order expectedResult = reader.readAtmServicesResponse("regular2");
+
+        AtmsService service = new AtmsService();
+        Order result = service.solve(tasks);
+
+        Assertions.assertArrayEquals(expectedResult.toArray(), result.toArray());
+    }
 }
