@@ -1,5 +1,9 @@
-# Transakcje
+## SAST
+![SAST](https://github.com/AleksMarzec/green/actions/workflows/codeql.yml/badge.svg)
 
+
+# Zadania
+## Transakcje
 W pewnym dużym banku, każdego dnia, przeprowadzanych są tysiące transakcji na rachunkach.
 Są to zarówno przelewy przychodzące (wpływy) jak i wychodzące (wydatki).
 
@@ -9,12 +13,11 @@ Dodatkowo ma wymaganie, aby lista rachunków była posortowana rosnąco.
 Przewiduje się, że w niedalekiej przyszłości, takich transakcji może być nawet 100 000, ponieważ stale powiększa się jego baza klientów.
 Nasz system musi być na to gotowy!
 
-## Zadanie:
+### Zadanie:
 Napisz algorytm, który przetworzy wszystkie transakcji i zwróci posortowaną listę rachunków, wraz z ilością uznań i obciążeń oraz saldo końcowe.
 Zakłada się, że saldo początkowe każdego rachunku to 0zł.
 
-# Serwis bankomatów
-
+## Serwis bankomatów
 Zespół serwisujący bankomaty przychodzi do pracy po długim weekendzie.
 System zleceń serwisowych zawiera zgłoszenia, które muszą ustawić w kolejce obsługi.
 Kolejka związana jest trasą przejazdu grupy konwojowej przez poszczególne regiony a wyznaczona trasa przejazdu pomiędzy regionami została już zatwierdzona.
@@ -23,14 +26,13 @@ Jednym z takich zgłoszeń jest sygnał o niskim stanie gotówki bankomatu, któ
 Innym jest sygnał o awarii bankomatu z którym zespół techniczny nie ma komunikacji i nie może przeprowadzić procedury zdalnego ponownego uruchomienia. Takie zgłoszenie powinno zostać zrealizowane w pierwszej kolejności w danym regionie.
 Priorytetowe planowane zasilenie bankomatu dotyczy urządzenia gdzie trend zużycia stanu gotówki jest wysoki dlatego ta operacja jest wykonywana przez zleceniami standardowymi.
 
-## Zadanie
+### Zadanie
 Przygotuj system który przygotuje odpowiednią kolejność zleceń do obsługi dla grupy konwojowej, przy założeniu że:
 1)	konwój przejeżdża przez regiony biorąc pod uwagę rosnącą kolejność przydzielonych im numerów,
 2)	dany bankomat na liście zleceń dla grupy konwojowej może wystąpić tylko raz.
 
 
-# Gra online
-
+## Gra online
 Pewna świetna gra online w ostatnim czasie stała się bardzo popularna, a liczba graczy rośnie w szybkim tempie.
 Oprócz standardowej rozgrywki, co jakiś czas odbywają się eventy specjalne, na których można zdobyć najwięcej punktów. Każdy gracz chce wziąć w nich udział.
 Niestety, platforma na której uruchomiona jest gra, miewa problemy wydajnościowe dlatego wejście na plansze eventu odbywa się grupowo.
@@ -46,7 +48,7 @@ Niestety, z powodu wyżej wspomnianych problemów wydajnościowych, wejście na 
 - jeśli dwa klany mają taką samą ilość punktów, to większy priorytet ma klan z mniejszą liczbą graczy (co oznacza, że klan ma silniejszych graczy)
 - wszystkie klany muszą się dostać na event
 
-## Zadanie
+### Zadanie
 Napisz algorytm, który dla zadanej liczby miejsc w grupie (m) oraz klanów wraz z jej liczebnością (l) i łączną liczbą punktów (p) wyznaczy kolejność oraz układ w jakich gracze powinny wejść na planszę.
 Liczba klanów może być naprawdę długa, nawet do 20 000.
 
