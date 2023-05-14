@@ -7,6 +7,7 @@ package io.greentesla.api;
 
 import io.greentesla.model.generated.transactions.Accounts;
 import io.greentesla.model.generated.transactions.Transaction;
+import io.greentesla.model.generated.transactions.Transactions;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -34,6 +35,6 @@ public interface TransactionsApi {
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<Accounts> report(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody List<Transaction> body);
+    ResponseEntity<Accounts> report(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Transactions body);
 
 }

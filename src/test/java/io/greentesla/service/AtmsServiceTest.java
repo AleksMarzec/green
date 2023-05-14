@@ -1,6 +1,7 @@
 package io.greentesla.service;
 
 import io.greentesla.model.generated.atmservice.Order;
+import io.greentesla.model.generated.atmservice.ServiceTasks;
 import io.greentesla.model.generated.atmservice.Task;
 import io.greentesla.service.utils.JsonCasesReader;
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +14,7 @@ public class AtmsServiceTest {
     @Test
     public void regularCase() {
         JsonCasesReader reader = new JsonCasesReader();
-        List<Task> tasks = reader.readAtmServicesRequest("regular");
+        ServiceTasks tasks = reader.readAtmServicesRequest("regular");
         Order expectedResult = reader.readAtmServicesResponse("regular");
 
         AtmsService service = new AtmsService();
@@ -25,7 +26,7 @@ public class AtmsServiceTest {
     @Test
     public void regularCase2() {
         JsonCasesReader reader = new JsonCasesReader();
-        List<Task> tasks = reader.readAtmServicesRequest("regular2");
+        ServiceTasks tasks = reader.readAtmServicesRequest("regular2");
         Order expectedResult = reader.readAtmServicesResponse("regular2");
 
         AtmsService service = new AtmsService();

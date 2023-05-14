@@ -34,13 +34,17 @@ public class OnlinegameApiController implements OnlinegameApi {
     }
 
     public ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody Players body) {
-        String accept = request.getHeader("Accept");
-        if (accept == null || !accept.contains("application/json")) {
-            return new ResponseEntity<Order>(HttpStatus.NOT_IMPLEMENTED);
+        Order result = null;
+
+        try {
+            OnlineGameService onlineGameService = new OnlineGameService();
+            result = onlineGameService.solve(body);
+        } catch (Exception ex) {
+            // logger
+            return new ResponseEntity<Order>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        OnlineGameService onlineGameService = new OnlineGameService();
-        Order res = onlineGameService.solve(body);
-        return new ResponseEntity<Order>(res, HttpStatus.OK);
+
+        return new ResponseEntity<Order>(result, HttpStatus.OK);
 
     }
 

@@ -2,6 +2,7 @@ package io.greentesla.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.greentesla.model.generated.atmservice.Order;
+import io.greentesla.model.generated.atmservice.ServiceTasks;
 import io.greentesla.model.generated.atmservice.Task;
 import io.greentesla.service.AtmsService;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,16 +35,18 @@ public class AtmsApiController implements AtmsApi {
         this.request = request;
     }
 
-    public ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody List<Task> body) {
-        String accept = request.getHeader("Accept");
-        AtmsService logic = new AtmsService();
+    public ResponseEntity<Order> calculate(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema()) @Valid @RequestBody ServiceTasks body) {
+        Order result = null;
 
-        if (accept == null || !accept.contains("application/json")) {
-            return new ResponseEntity<Order>(HttpStatus.NOT_IMPLEMENTED);
+        try {
+            AtmsService atmsService = new AtmsService();
+            result = atmsService.solve(body);
+        } catch (Exception ex) {
+            // logger
+            return new ResponseEntity<Order>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        AtmsService atmsService = new AtmsService();
-        Order res = atmsService.solve(body);
-        return new ResponseEntity<Order>(res, HttpStatus.OK);
+
+        return new ResponseEntity<Order>(result, HttpStatus.OK);
 
     }
 
