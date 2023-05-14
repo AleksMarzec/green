@@ -1,8 +1,8 @@
 package io.greentesla.service;
 
-import io.greentesla.model.transactions.Account;
-import io.greentesla.model.transactions.Accounts;
-import io.greentesla.model.transactions.Transaction;
+import io.greentesla.model.generated.transactions.Account;
+import io.greentesla.model.generated.transactions.Accounts;
+import io.greentesla.model.generated.transactions.Transaction;
 import io.greentesla.service.utils.JsonCasesReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

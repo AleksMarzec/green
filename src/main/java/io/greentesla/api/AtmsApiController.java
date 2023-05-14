@@ -1,7 +1,7 @@
 package io.greentesla.api;
 
-import io.greentesla.model.atmservice.Order;
-import io.greentesla.model.atmservice.Task;
+import io.greentesla.model.generated.atmservice.Order;
+import io.greentesla.model.generated.atmservice.Task;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.greentesla.service.AtmsService;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-05-08T20:53:13.805155972Z[GMT]")

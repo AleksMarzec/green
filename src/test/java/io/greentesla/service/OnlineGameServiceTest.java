@@ -1,15 +1,10 @@
 package io.greentesla.service;
 
-import io.greentesla.model.atmservice.Task;
-import io.greentesla.model.onlinegame.Order;
-import io.greentesla.model.onlinegame.Players;
+import io.greentesla.model.generated.onlinegame.Order;
+import io.greentesla.model.generated.onlinegame.Players;
 import io.greentesla.service.utils.JsonCasesReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class OnlineGameServiceTest {
 

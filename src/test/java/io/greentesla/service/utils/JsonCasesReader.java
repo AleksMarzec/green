@@ -2,12 +2,12 @@ package io.greentesla.service.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import io.greentesla.model.atmservice.ATM;
-import io.greentesla.model.atmservice.Order;
-import io.greentesla.model.atmservice.Task;
-import io.greentesla.model.onlinegame.Players;
-import io.greentesla.model.transactions.Account;
-import io.greentesla.model.transactions.Transaction;
+import io.greentesla.model.generated.atmservice.ATM;
+import io.greentesla.model.generated.atmservice.Order;
+import io.greentesla.model.generated.atmservice.Task;
+import io.greentesla.model.generated.onlinegame.Players;
+import io.greentesla.model.generated.transactions.Account;
+import io.greentesla.model.generated.transactions.Transaction;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -55,8 +55,8 @@ public class JsonCasesReader<T> {
         return readObject(filename, playersType);
     }
 
-    public io.greentesla.model.onlinegame.Order readOnlineGameResponse(String testName) {
-        Class<io.greentesla.model.onlinegame.Order> playersType = io.greentesla.model.onlinegame.Order.class;
+    public io.greentesla.model.generated.onlinegame.Order readOnlineGameResponse(String testName) {
+        Class<io.greentesla.model.generated.onlinegame.Order> playersType = io.greentesla.model.generated.onlinegame.Order.class;
         String filename = "src/test/java/io/greentesla/service/jsonresponses/onlinegame.".concat(testName).concat(".json");
 
         return readObject(filename, playersType);
