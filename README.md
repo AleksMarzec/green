@@ -1,3 +1,7 @@
+# Ogólne
+W repozytorium znajduje się rozwiązanie [zadań konkursowych](https://www.ing.pl/pionteching).
+Założyłam, że maszyna, na której kod będzie testowany będzie posiadała dostęp do internetu (repo Maven). W innym wypadku należałoby w skrypcie budującym zmienić położenie lokalnego repozytorium Maven, a w repozytorium umieścić zależności i na ich podstawie zbudować projekt.
+
 ## SAST
 ![SAST](https://github.com/AleksMarzec/green/actions/workflows/codeql.yml/badge.svg)
 
